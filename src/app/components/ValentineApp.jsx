@@ -3,10 +3,10 @@
 import React, { useState, useEffect } from "react";
 import { ArrowRight, Sparkles } from "lucide-react";
 import confetti from "canvas-confetti";
-import { motion } from "motion/react";
+import { motion } from "framer-motion"; // Changed from "motion/react" to "framer-motion"
 import Image from "next/image";
 import utee from "./utee.webp";
-import buddies from "./buddies.webp"
+import buddies from "./buddies.webp";
 
 const fadeInAnimation = {
   initial: { opacity: 0, y: 20 },
@@ -36,13 +36,12 @@ const ValentineApp = () => {
     }
   }, [step]);
 
-  // 🎉 Trigger confetti when the final page appears
   useEffect(() => {
     if (showFinalPage) {
       confetti({
         particleCount: 150,
         spread: 100,
-        origin: { y: 0.6 }, // Starts lower for a realistic effect
+        origin: { y: 0.6 },
         colors: ["#ff0000", "#ff66b2", "#ffcc00", "#ffffff"],
       });
     }
@@ -59,86 +58,15 @@ const ValentineApp = () => {
           exit="exit"
           className="w-full"
         >
-          {step === 1 && (
-            <>
-              <h1 className="text-3xl md:text-5xl font-bold text-white">
-                Hello Utibe! 😊💕
-              </h1>
-              <p className="text-lg md:text-2xl text-gray-300 mt-3">
-                Yesssss! I am no longer in your office... <br /> I'm now in your phone! 📱✨
-              </p>
-            </>
-          )}
-
-          {step === 2 && (
-            <>
-              <h1 className="text-3xl md:text-5xl font-bold text-red-500">
-                So yeah...
-              </h1>
-              <p className="text-lg md:text-2xl text-gray-300 mt-3">
-                This boy is bugging you a whole lot, right? 🤔😂
-              </p>
-            </>
-          )}
-
-          {step === 3 && (
-            <>
-              <h1 className="text-3xl md:text-5xl font-bold text-red-500">
-                I was wondering...
-              </h1>
-              <p className="text-lg md:text-2xl text-gray-300 mt-3">
-                I don't do Valentine’s ❤️, but my friend loves it... <br /> so I'm making it special in my own way! 😎🎉
-              </p>
-            </>
-          )}
-
-          {step === 4 && (
-            <>
-              <h1 className="text-3xl md:text-5xl font-bold text-red-500">
-                Me and my baby (my PC) 👨‍💻
-              </h1>
-              <p className="text-lg md:text-2xl text-gray-300 mt-3">
-                We decided to make something for you... 💡🚀
-              </p>
-            </>
-          )}
-
-          {step === 5 && (
-            <>
-              <h1 className="text-3xl md:text-5xl font-bold text-red-500">
-                It was gonna be a game 🎮
-              </h1>
-              <p className="text-lg md:text-2xl text-gray-300 mt-3">
-                But I'm too tired 🥱, sooooooo... <br /> Here's this instead! 💝
-              </p>
-            </>
-          )}
-
-          {step === 6 && (
-            <>
-              <h1 className="text-3xl md:text-5xl font-bold text-red-500">
-                Using my last energy ⚡️
-              </h1>
-              <p className="text-lg md:text-2xl text-gray-300 mt-3">
-                To make something speciallllllllllllll for you! 😍💖
-              </p>
-            </>
-          )}
-
-          {step === 7 && (
-            <>
-              <h1 className="text-4xl md:text-6xl font-bold text-white flex items-center justify-center gap-2">
-                Almost there... <Sparkles className="text-yellow-400 animate-spin" />
-              </h1>
-              <p className="text-lg md:text-2xl text-gray-300 mt-3">
-                Just wait a little... ⏳
-              </p>
-            </>
-          )}
-
-          {step === 8 && (
+          {step === 8 ? (
             <div className="flex flex-col items-center justify-center">
-            <Image src={utee} width={250} className="flex items-center justify-center" />
+              <Image
+                src={utee}
+                width={250}
+                height={250}
+                alt="Utibe"
+                className="w-full max-w-[250px] rounded-lg shadow-lg"
+              />
               <h1 className="text-3xl md:text-5xl font-bold text-white">
                 Countdown begins... ⏳
               </h1>
@@ -146,17 +74,49 @@ const ValentineApp = () => {
                 {countdown}
               </p>
             </div>
+          ) : (
+            <>
+              <h1 className="text-3xl md:text-5xl font-bold text-white">
+                {step === 1 && "Hello Utibe! 😊💕"}
+                {step === 2 && "So yeah..."}
+                {step === 3 && "I was wondering..."}
+                {step === 4 && "Me and my baby (my PC) 👨‍💻"}
+                {step === 5 && "It was gonna be a game 🎮"}
+                {step === 6 && "Using my last energy ⚡️"}
+                {step === 7 && (
+                  <span className="flex items-center justify-center gap-2">
+                    Almost there...{" "}
+                    <Sparkles className="text-yellow-400 animate-spin" />
+                  </span>
+                )}
+              </h1>
+              <p className="text-lg md:text-2xl text-gray-300 mt-3">
+                {step === 1 &&
+                  "Yesssss! I am no longer in your office... \n I'm now in your phone! 📱✨"}
+                {step === 2 &&
+                  "This boy is bugging you a whole lot, right? 🤔😂"}
+                {step === 3 &&
+                  "I don't do Valentine’s ❤️, but my friend loves it... \n so I'm making it special in my own way! 😎🎉"}
+                {step === 4 &&
+                  "We decided to make something for you... 💡🚀"}
+                {step === 5 &&
+                  "But I'm too tired 🥱, sooooooo... \n Here's this instead! 💝"}
+                {step === 6 &&
+                  "To make something speciallllllllllllll for you! 😍💖"}
+                {step === 7 && "Just wait a little... ⏳"}
+              </p>
+            </>
           )}
 
           {step < 8 && (
-            <button
+            <motion.button
               onClick={nextStep}
               whileTap={{ scale: 0.9 }}
-              className="mt-10 m-10 px-6 py-3 rounded-full bg-red-500 text-white text-lg font-semibold shadow-md hover:bg-red-600 transition absolute bottom-10 right-0 flex items-center gap-1"
+              className="mt-10 px-6 py-3 m-10 rounded-full bg-red-500 text-white text-lg font-semibold shadow-md hover:bg-red-600 transition absolute bottom-10 right-0 flex items-center gap-1"
             >
               <span>Next</span>
               <ArrowRight />
-            </button>
+            </motion.button>
           )}
         </motion.div>
       ) : (
@@ -169,7 +129,13 @@ const ValentineApp = () => {
           <h1 className="text-6xl md:text-8xl font-bold text-red-500 animate-pulse">
             Happy Valentine’s Day, Utee! ❤️🎉
           </h1>
-          <Image src={buddies} width={250} />
+          <Image
+            src={buddies}
+            width={250}
+            height={250}
+            alt="Buddies"
+            className="w-full max-w-[250px] rounded-lg shadow-lg"
+          />
         </motion.div>
       )}
     </div>
