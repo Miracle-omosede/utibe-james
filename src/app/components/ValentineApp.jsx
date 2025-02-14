@@ -124,7 +124,7 @@ const ValentineApp = () => {
           variants={fadeInAnimation}
           initial="initial"
           animate="animate"
-          className="flex flex-col items-center justify-center h-screen bg-white"
+          className="flex flex-col items-center justify-center h-screen"
         >
           <h1 className="text-6xl md:text-8xl font-bold text-red-500 animate-pulse">
             Happy Valentine’s Day, Utee! ❤️🎉
